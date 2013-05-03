@@ -9,7 +9,7 @@ see https://segment.io/libraries/analytics.js
 
 ## Setup
 
-Set your api key in [setting Meteor.public.analytics_api_key](http://docs.meteor.com/#meteor_settings) (example below)
+Set your api key with [Meteor.settings](http://docs.meteor.com/#meteor_settings) as `Meteor.settings.public.analytics_api_key`
 
 ```javascript
 {
