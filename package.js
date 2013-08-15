@@ -8,5 +8,7 @@ Package.on_use(function (api) {
   ], 'client'
   );
 
-  api.export("analytics", "client");
+  if (typeof api.export !== 'undefined') {
+    api.export("analytics", "client");
+  }
 });
