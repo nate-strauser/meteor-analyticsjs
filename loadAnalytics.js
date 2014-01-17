@@ -25,7 +25,7 @@ localAnalytics.load = function(apiKey) {
 
 	// Loop through analytics.js' methods and generate a wrapper method for each.
 	var methods = ['identify', 'track', 'trackLink', 'trackForm', 'trackClick',
-	'trackSubmit', 'pageview', 'ab', 'alias', 'ready'];
+	'trackSubmit', 'pageview', 'ab', 'alias', 'ready', 'page'];
 	for (var i = 0; i < methods.length; i++) {
 		localAnalytics[methods[i]] = methodFactory(methods[i]);
 	}
