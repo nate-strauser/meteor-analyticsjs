@@ -1,11 +1,9 @@
 meteor-analyticsjs
 ==================
 
-Analytics.js packaged for Meteor
+Segment.io's [Analytics.js](https://segment.io/libraries/analytics.js) packaged for Meteor.
 
-exposes `analytics` as a global client variable
-
-see https://segment.io/libraries/analytics.js
+Exposes `analytics` as a global client variable.
 
 ## Setup
 
