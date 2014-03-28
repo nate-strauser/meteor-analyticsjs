@@ -16,3 +16,23 @@ Set your api key with [Meteor.settings](http://docs.meteor.com/#meteor_settings)
   }
 }
 ```
+
+## Usage
+
+Here's how to track page loads, if you're using `iron-router`:
+
+```js
+Router.configure({
+  ...,
+  load: function () {
+    var current = Router.current();
+    // to avoid double calls, we'll work around https://github.com/EventedMind/iron-router/issues/543
+    if (current && !Session.equals('currentPath', current.path)) {
+      analytics.page(current.path);
+      Session.set('currentPath', current.path)
+    }
+  }
+});
+```
+
+For more types of tracking, refer to the [Analytics.js documentation](https://segment.io/libraries/analytics.js).
