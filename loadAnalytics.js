@@ -40,5 +40,6 @@ window.analytics = analytics;
 if (Meteor.settings && Meteor.settings.public !== undefined && Meteor.settings.public.analytics_api_key) {
   analytics.load(Meteor.settings.public.analytics_api_key);
 } else {
-  console.warn("No Segment.io Analytics.js API key found. Are you sure you've passed it via meteor --settings?");
+  if (typeof console !== 'undefined' && typeof console.warn !== 'undefined')
+    console.warn("No Segment.io Analytics.js API key found. Are you sure you've passed it via meteor --settings?");
 }
