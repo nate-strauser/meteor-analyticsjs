@@ -25,12 +25,7 @@ Here's how to track page loads, if you're using `iron-router`:
 Router.configure({
   ...,
   load: function () {
-    var current = Router.current();
-    // to avoid double calls, we'll work around https://github.com/EventedMind/iron-router/issues/543
-    if (current && !Session.equals('currentPath', current.path)) {
-      analytics.page(current.path);
-      Session.set('currentPath', current.path)
-    }
+    analytics.page(this.path);
   }
 });
 ```
