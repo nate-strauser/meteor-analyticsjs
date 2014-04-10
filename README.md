@@ -12,7 +12,8 @@ Set your api key with [Meteor.settings](http://docs.meteor.com/#meteor_settings)
 ```javascript
 {
   "public": {
-    "analytics_api_key": "YOUR-ANALYTICS-API-KEY"
+    "analytics_api_key": "YOUR-ANALYTICS-API-KEY",
+    "analytics_localhost_active":true //optional, this will enable analytics on localhost, disabled by default
   }
 }
 ```
@@ -24,7 +25,7 @@ Here's how to track page loads, if you're using `iron-router`:
 ```js
 Router.configure({
   ...,
-  load: function () {
+  onRun: function () {
     analytics.page(this.path);
   }
 });

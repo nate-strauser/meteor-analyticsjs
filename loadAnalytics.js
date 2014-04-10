@@ -38,7 +38,12 @@ window.analytics = analytics;
 // Load analytics.js with your API key, which will automatically load all of the
 // analytics integrations you've turned on for your account. Boosh!
 if (Meteor.settings && Meteor.settings.public !== undefined && Meteor.settings.public.analytics_api_key) {
-  analytics.load(Meteor.settings.public.analytics_api_key);
+  if(Meteor.absoluteUrl() !== 'http://localhost:3000/' || Meteor.settings.public.analytics_localhost_active === true){
+    analytics.load(Meteor.settings.public.analytics_api_key);
+  }else{
+    if (typeof console !== 'undefined' && typeof console.warn !== 'undefined')
+      console.warn("It looks like you are doing development on localhost, skipping Analytics.js load. set Meteor.settings.public.analytics_localhost_active = true to override");
+  }
 } else {
   if (typeof console !== 'undefined' && typeof console.warn !== 'undefined')
     console.warn("No Segment.io Analytics.js API key found. Are you sure you've passed it via meteor --settings?");
