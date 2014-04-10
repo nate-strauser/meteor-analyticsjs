@@ -1,3 +1,4 @@
+Session.setDefault('AnalyticsJS_loaded', false);
 analytics = [];
 window.analytics = analytics;
 var localAnalytics = [];
@@ -30,6 +31,7 @@ localAnalytics.load = function(apiKey) {
     localAnalytics[methods[i]] = methodFactory(methods[i]);
   }
   analytics=localAnalytics;
+  Session.set('AnalyticsJS_loaded', true);
 };
 
 analytics = localAnalytics;
