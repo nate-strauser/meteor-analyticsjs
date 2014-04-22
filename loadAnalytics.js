@@ -3,13 +3,16 @@ analytics = [];
 window.analytics = analytics;
 var localAnalytics = [];
 // Define a method that will asynchronously load analytics.js from our CDN.
-localAnalytics.load = function(apiKey) {
+localAnalytics.load = function(key) {
   // Create an async script element for analytics.js.
   var script = document.createElement('script');
   script.type = 'text/javascript';
+  script.id = 'analytics-js';
   script.async = true;
-  script.src = ('https:' === document.location.protocol ? 'https://' : 'http://') +
-    'd2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/' + apiKey + '/analytics.min.js';
+  script.src = ('https:' === document.location.protocol
+    ? 'https://' : 'http://')
+    + 'cdn.segment.io/analytics.js/v1/'
+    + key + '/analytics.min.js';
 
   // Find the first script element on the page and insert our script next to it.
   var firstScript = document.getElementsByTagName('script')[0];
@@ -25,14 +28,17 @@ localAnalytics.load = function(apiKey) {
   };
 
   // Loop through analytics.js' methods and generate a wrapper method for each.
-  var methods = ['identify', 'track', 'trackLink', 'trackForm', 'trackClick',
-  'trackSubmit', 'pageview', 'ab', 'alias', 'ready', 'page'];
+  var methods = ['identify', 'group', 'track',
+  'page', 'pageview', 'alias', 'ready', 'on', 'once', 'off',
+  'trackLink', 'trackForm', 'trackClick', 'trackSubmit'];
   for (var i = 0; i < methods.length; i++) {
     localAnalytics[methods[i]] = methodFactory(methods[i]);
   }
   analytics=localAnalytics;
   Session.set('AnalyticsJS_loaded', true);
 };
+
+localAnalytics.SNIPPET_VERSION = '2.0.9';
 
 analytics = localAnalytics;
 window.analytics = analytics;
@@ -43,8 +49,10 @@ if (Meteor.settings && Meteor.settings.public !== undefined && Meteor.settings.p
   if(Meteor.absoluteUrl() !== 'http://localhost:3000/' || Meteor.settings.public.analytics_localhost_active === true){
     analytics.load(Meteor.settings.public.analytics_api_key);
   }else{
-    if (typeof console !== 'undefined' && typeof console.warn !== 'undefined')
-      console.warn("It looks like you are doing development on localhost, skipping Analytics.js load. set Meteor.settings.public.analytics_localhost_active = true to override");
+    analytics.load('invalid');
+    if (typeof console !== 'undefined' && typeof console.warn !== 'undefined'){
+      console.warn("It looks like you are doing development on localhost, loading Analytics.js with invalid key. set Meteor.settings.public.analytics_localhost_active = true to override");
+    }
   }
 } else {
   if (typeof console !== 'undefined' && typeof console.warn !== 'undefined')

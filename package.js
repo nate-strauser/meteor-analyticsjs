@@ -3,10 +3,15 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
+  // CLIENT
+  api.use([
+	'session'
+  ], 'client');
+
+
   api.add_files([
     'loadAnalytics.js'
-  ], 'client'
-  );
+  ], 'client');
 
   if (typeof api.export !== 'undefined') {
     api.export("analytics", "client");
