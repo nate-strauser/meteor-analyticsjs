@@ -23,11 +23,9 @@ Set your api key with [Meteor.settings](http://docs.meteor.com/#meteor_settings)
 Here's how to track page loads, if you're using `iron-router`:
 
 ```js
-Router.configure({
-  ...,
-  onRun: function () {
-    analytics.page(this.path);
-  }
+Router.onRun(function(){
+	if(Session.equals('AnalyticsJS_loaded', true))
+		analytics.page(this.path);
 });
 ```
 
