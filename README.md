@@ -30,3 +30,8 @@ Router.onRun(function(){
 ```
 
 For more types of tracking, refer to the [Analytics.js documentation](https://segment.io/libraries/analytics.js).
+
+
+## Server side tracking
+
+This package is for client side metrics only.  You'll want the `npm` package and the `analytics-node` npm to record server side metrics.  See https://github.com/nate-strauser/meteor-analyticsjs/issues/10
