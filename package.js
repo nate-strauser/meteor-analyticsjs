@@ -1,11 +1,11 @@
 Package.describe({
   name:"natestrauser:analyticsjs",
-  summary: "Analytics.js packaged for meteor.",
+  summary: "Segment's analytics.js packaged for Meteor",
   version: "0.1.9",
   git: "https://github.com/nate-strauser/meteor-analyticsjs.git"
 });
 
-Package.on_use(function (api) {
+Package.onUse(function (api) {
   api.versionsFrom("METEOR@0.9.0");
   // CLIENT
   api.use([
@@ -13,7 +13,7 @@ Package.on_use(function (api) {
   ], 'client');
 
 
-  api.add_files([
+  api.addFiles([
     'loadAnalytics.js'
   ], 'client');
 
